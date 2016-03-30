@@ -20,7 +20,9 @@ class YouTubeServiceProvider extends ServiceProvider
 	 */
 	public function boot()
 	{
-		
+		$this->publishes([
+        __DIR__.'/config/youtube.php' => config_path('youtube.php'),
+    ]);
 	}
 	
 	/**
@@ -30,9 +32,10 @@ class YouTubeServiceProvider extends ServiceProvider
 	 */
 	public function register()
 	{
-		$this->app['youtube'] = $this->app->share(function($app){
-			return new YouTube;
-		});
+		$this->app->bind("youtube", function(){
+                return $this->app->make('KennyRay\YouTube\Youtube', [config('youtube.KEY')]);
+            });
+		
 		$this->app->booting(function(){
 			$loader = \Illuminate\Foundation\AliasLoader::getInstance();
 			$loader->alias('YouTube', 'KennyRay\YouTube\Facades\YouTube');
