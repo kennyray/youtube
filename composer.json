@@ -1,0 +1,23 @@
+{
+    "name": "kennyray/youtube",
+    "description": "YouTube API v3",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Kenny Ray",
+            "email": "kenny@kennyray.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "illuminate/support": "5.0.*"
+    },
+     "classmap": [
+            "src/migrations"
+        ],
+        "psr-4": {
+            "KennyRay\\YouTube\\": "src/"
+        }
+    },
+    "minimum-stability": "stable"
+}
