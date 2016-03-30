@@ -26,6 +26,7 @@ class YouTube
 
 
 
+
      /**
      * Constructor
      * $youtube = new Youtube(array('key' => 'KEY HERE'))
@@ -57,12 +58,32 @@ class YouTube
     	return $this->getData($baseurl, $params);  // This will be extracted to separate class
     }
 
+    public function search($keyword)
+    {
+    	$params = array(
+ 			'q' => $keyword,
+ 			'forMine' => 'true',
+ 			'type' => 'video',
+ 			'key' => $this->youtube_api_key,
+ 			'part' => 'snippet',
+    	);
+    	$baseurl = $this->base_api_url . 'search';
+    	return $this->getData($baseurl, $params);  // This will be extracted to separate class
+    }
+
+
+
+
+
+
+
+
     protected function getData($baseurl, $params)
     {	
     	$query_string = http_build_query($params);
 
     	$url = $baseurl . '?' . $query_string;
-    
+
     	$ch = curl_init();  
 	    curl_setopt($ch,CURLOPT_URL,$url);
 	    curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
